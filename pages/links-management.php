@@ -1,0 +1,90 @@
+<?php
+    require_once "../app/UrlDatabase.php";
+    $db = new UrlDatabase;
+    $short_urls = $db->getShortUrls();
+
+ ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" charset="utf-8"></script>
+  <title>Quản lý Links</title>
+</head>
+
+<body>
+  <header class="mb-2">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="<?php echo BASE_URL . 'pages/links-management.php'; ?>">Quản lý Link</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <div class="container">
+    <h1 class="display-4 text-center">Quản lý Links</h1>
+
+    <?php if ($short_urls): ?>
+
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Key</th>
+          <th scope="col">Value</th>
+          <th scope="col">Expire</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($short_urls as $short_url): ?>
+        <tr>
+          <th scope="row">
+            <?php echo $short_url["id"]; ?>
+          </th>
+          <td>
+            <a href="<?php echo $short_url["long_url"]; ?>">
+              <?php echo $short_url["long_url"]; ?></a>
+          </td>
+          <td>
+            <a href="<?php echo BASE_URL . $short_url["short_code"]; ?>">
+              <?php echo $short_url["short_code"]; ?></a>
+          </td>
+          <td>
+            <?php echo $short_url["created_at"]; ?>
+          </td>
+          <td>
+            <?php echo $short_url["status"]; ?>
+          </td>
+          <td>
+            <button type="button" class="btn btn-info">Edit</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+          </td>
+        </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+
+    <?php else: ?>
+    <h5 class="text-danger">Không tìm thấy dữ liệu</h5>
+    <?php endif; ?>
+
+  </div>
+</body>
+
+</html>
