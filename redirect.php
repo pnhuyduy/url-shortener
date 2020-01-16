@@ -1,8 +1,9 @@
 <?php
 
-require_once __DIR__ . '/configs.php';
-require_once "app/Cache.php";
-require_once 'app/UrlDatabase.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/configs.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/app/Cache.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/app/UrlDatabase.php';
+
 $cache = new Cache;
 $db = new UrlDatabase;
 

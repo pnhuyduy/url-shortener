@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once __DIR__ . '/configs.php';
-require_once './app/UrlShortener.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/configs.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/app/UrlShortener.php';
 
 
 $UrlShortener = new UrlShortener;

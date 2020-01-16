@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once '../app/UrlDatabase.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/app/UrlDatabase.php';
 
     $db = new UrlDatabase;
     $id = $_GET["id"];

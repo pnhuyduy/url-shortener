@@ -1,7 +1,7 @@
 <?php
     session_start();
-    require_once '../app/configs.php';
-    require_once "../app/UrlDatabase.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/configs.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/app/UrlDatabase.php';
     $db = new UrlDatabase;
     $short_urls = $db->getShortUrls();
 
