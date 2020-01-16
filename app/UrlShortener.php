@@ -1,5 +1,5 @@
 <?php
-    require_once 'configs.php';
+    require_once __DIR__ . '/configs.php';
     require_once 'ShortCode.php';
     require_once 'UrlDatabase.php';
     require_once 'Cache.php';

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'app/configs.php';
+require_once __DIR__ . '/configs.php';
 require_once './app/UrlShortener.php';
 
 

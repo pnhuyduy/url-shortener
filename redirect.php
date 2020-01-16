@@ -1,6 +1,6 @@
 <?php
 
-require_once 'app/configs.php';
+require_once __DIR__ . '/configs.php';
 require_once "app/Cache.php";
 require_once 'app/UrlDatabase.php';
 $cache = new Cache;

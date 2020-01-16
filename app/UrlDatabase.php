@@ -1,5 +1,5 @@
 <?php
-    require_once 'configs.php';
+    require_once __DIR__ . '/configs.php';
     require_once 'Cache.php';
 
 class UrlDatabase {
