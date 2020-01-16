@@ -28,28 +28,17 @@ class UrlShortener {
         while ($cache->checkIfKeyExists($shortCode)) {
           $shortCode = ShortCode::generateRandomString();
         };
-        if ($duplicateURL) {
+
+        if ($duplicateURL) { // option cho phép tạo url có nhiều short code
             $this->db->insertToDB($url, $shortCode);
-            $cache->addData($shortCode, [
-                "longUrl" => $url,
-                "status" => 1
-              ], 0);
             return $shortCode;
 
         } else {
-            if ($this->db->urlExistsInDB($url)) {
-                $shortCode = $this->db->getShortCode($url);
-                $cache->addData($shortCode, [
-                    "longUrl" => $url,
-                    "status" => 1
-                  ], 0);
+            if ($this->db->urlExistsInDB($url)) { // trả về short code đã tồn tại
+                $shortCode = $this->db->getShortCodeByUrl($url);
                 return $shortCode;
             } else {
                 $this->db->insertToDB($url, $shortCode);
-                $cache->addData($shortCode, [
-                    "longUrl" => $url,
-                    "status" => 1
-                  ], 0);
                 return $shortCode;
             }
         }
