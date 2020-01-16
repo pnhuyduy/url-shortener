@@ -1,6 +1,5 @@
 <?php
-
-require_once "configs.php";
+    require_once 'configs.php';
 
 /**
  *
@@ -49,5 +48,12 @@ class Cache {
     // Xoá toàn bộ cache
     public function flushData() {
         return $this->connection->flush();
+    }
+
+    public function pushTimeClick($key)
+    {
+        $data = $this->getData($key);
+        $data["timeClick"]++;
+        $this->setData($key, $data, 0);
     }
 }
