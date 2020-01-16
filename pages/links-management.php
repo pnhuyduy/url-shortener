@@ -1,4 +1,6 @@
 <?php
+    session_start();
+    require_once '../app/configs.php';
     require_once "../app/UrlDatabase.php";
     $db = new UrlDatabase;
     $short_urls = $db->getShortUrls();
@@ -36,6 +38,19 @@
     </div>
   </header>
   <div class="container">
+
+      <?php
+          if (isset($_SESSION['updateStatus'])) {
+              ?>
+              <div class="alert alert-success" role="alert">
+                <?php echo $_SESSION['updateStatus']; ?>
+              </div>
+              <?php
+
+              unset($_SESSION['updateStatus']);
+          }
+      ?>
+
     <h1 class="display-4 text-center">Quản lý Links</h1>
 
     <?php if ($short_urls): ?>
@@ -46,7 +61,8 @@
           <th scope="col">#</th>
           <th scope="col">Key</th>
           <th scope="col">Value</th>
-          <th scope="col">Expire</th>
+          <th scope="col">Created at</th>
+          <th scope="col">Expire at</th>
           <th scope="col">Status</th>
           <th scope="col">Action</th>
         </tr>
@@ -69,11 +85,13 @@
             <?php echo $short_url["created_at"]; ?>
           </td>
           <td>
+            <?php echo $short_url["created_at"]; ?>
+          </td>
+          <td>
             <?php echo $short_url["status"]; ?>
           </td>
           <td>
-            <button type="button" class="btn btn-info">Edit</button>
-            <button type="button" class="btn btn-danger">Delete</button>
+            <a href="<?php echo BASE_URL . 'pages/edit-link.php' . '?id=' .$short_url["id"]; ?>" class="btn btn-info">Edit</a>
           </td>
         </tr>
         <?php endforeach; ?>
