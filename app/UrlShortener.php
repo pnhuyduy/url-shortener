@@ -1,5 +1,4 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/configs.php';
     require_once 'ShortCode.php';
     require_once 'UrlDatabase.php';
     require_once 'Cache.php';

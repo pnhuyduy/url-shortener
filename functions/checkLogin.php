@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    
     if (isset($_POST["email"])) {
       // $url = 'https://192.168.1.16:9001/employee/get-token?email=' . $_POST["email"] . '&password=' . $_POST["password"];
       //

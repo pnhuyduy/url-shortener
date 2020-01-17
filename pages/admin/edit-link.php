@@ -1,5 +1,5 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/checkToken.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/functions/checkToken.php';
     require_once $_SERVER['DOCUMENT_ROOT'] . '/app/UrlDatabase.php';
 
     $db = new UrlDatabase;
@@ -10,7 +10,7 @@
         $result = $db->updateUrlData($id, $_POST["long_url"], $_POST["short_code"], $_POST["status"], $_POST["expire"]);
         if ($result === 1) {
           $_SESSION['updateStatus'] = "Update Url thành công!";
-          header('Location: links-management.php');
+          header('Location: /pages/admin');
         }
         elseif ($result === 0) {
           $message = "Url không thay đổi!";

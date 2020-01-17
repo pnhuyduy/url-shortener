@@ -1,6 +1,5 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/configs.php';
-
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/functions/configs.php';
 /**
  *
  */

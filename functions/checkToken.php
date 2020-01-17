@@ -1,6 +1,6 @@
 <?php
-
-require_once $_SERVER['DOCUMENT_ROOT'] . '/configs.php';
+session_start();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/functions/configs.php';
 
 // $token = URL_ANJ_SERVICES . '/employee/check-token?token=' . $_COOKIE["token"];
 //
@@ -18,5 +18,4 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/configs.php';
 // $res = json_decode($result, 1);
 if (!isset($_COOKIE["token"])) {
   require_once 'checkLogin.php';
-  // header("Location: /pages/login.php");
 }

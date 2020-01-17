@@ -1,6 +1,5 @@
 <?php
-session_start();
-require_once $_SERVER['DOCUMENT_ROOT'] . '/configs.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/checkToken.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/app/UrlShortener.php';
 
 

@@ -9,14 +9,14 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="<?php echo BASE_URL . '/pages/links-management.php'; ?>">Quản lý Link</a>
+            <a class="nav-link" href="<?php echo BASE_URL . '/pages/admin'; ?>">Quản lý Link</a>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
           <?php if (isset($_COOKIE["token"])): ?>
             <li class="nav-item">
 
-              <a href="<?php echo BASE_URL . '/logOut.php'; ?>" class="nav-link">Đăng xuất</a>
+              <a href="<?php echo BASE_URL . '/functions/logOut.php'; ?>" class="nav-link">Đăng xuất</a>
             </li>
           <?php endif; ?>
         </ul>

@@ -1,5 +1,5 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/checkToken.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/functions/checkToken.php';
     require_once $_SERVER['DOCUMENT_ROOT'] . '/app/UrlDatabase.php';
 
     $db = new UrlDatabase;
@@ -82,7 +82,7 @@
             <?php endif; ?>
           </td>
           <td>
-            <a href="<?php echo BASE_URL . '/pages/edit-link.php' . '?id=' .$short_url["id"]; ?>" class="btn btn-info">Edit</a>
+            <a href="<?php echo BASE_URL . '/pages/admin/edit-link.php' . '?id=' .$short_url["id"]; ?>" class="btn btn-info">Edit</a>
           </td>
         </tr>
         <?php endforeach; ?>
