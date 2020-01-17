@@ -11,7 +11,7 @@ if (isset($_POST['url'])) {
     // Tạo short code
     $shortCode = $UrlShortener->createShortCode($longUrl, CREATE_NEW_LINK_IF_EXISTS);
 
-    $_SESSION['shortUrl'] = "<a href=". BASE_URL . $shortCode .">". BASE_URL . $shortCode . "</a>";
+    $_SESSION['shortUrl'] = "<a href=". BASE_URL . '/' . $shortCode .">". BASE_URL . '/' . $shortCode . "</a>";
 
 }
 
