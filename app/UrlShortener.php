@@ -7,14 +7,13 @@
  *
  */
 class UrlShortener {
-    private static $table = 'short_urls';
     private $db;
 
     function __construct() {
         $this->db = new UrlDatabase;
     }
 
-    public function createShortCode($url, $duplicateURL = false) {
+    public function createShortCode($url, $duplicateURL = 0) {
         // if (empty($url)) {
         //     throw new Exception("URL truyền vào trỗng");
         // }
@@ -29,15 +28,15 @@ class UrlShortener {
           $shortCode = ShortCode::generateRandomString();
         };
 
-        if ($duplicateURL) { // option cho phép tạo url có nhiều short code
+        if ($duplicateURL) { // option cho phép một url đích có nhiều short code
             $this->db->insertToDB($url, $shortCode);
             return $shortCode;
 
         } else {
-            if ($this->db->urlExistsInDB($url)) { // trả về short code đã tồn tại
+            if ($this->db->urlExistsInDB($url)) { // trả về short code nếu url đích đã tồn tại
                 $shortCode = $this->db->getShortCodeByUrl($url);
                 return $shortCode;
-            } else {
+            } else { // tạo mới nếu chưa tồn tại
                 $this->db->insertToDB($url, $shortCode);
                 return $shortCode;
             }

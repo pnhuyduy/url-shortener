@@ -59,10 +59,12 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Key</th>
-          <th scope="col">Value</th>
-          <th scope="col">Created at</th>
-          <th scope="col">Expire at</th>
+          <th scope="col">Url đích</th>
+          <th scope="col">Short code</th>
+          <th scope="col">Lượt click</th>
+          <th scope="col">Tạo lúc</th>
+          <th scope="col">Cập nhật lúc</th>
+          <th scope="col">Tạo bởi</th>
           <th scope="col">Status</th>
           <th scope="col">Action</th>
         </tr>
@@ -79,16 +81,26 @@
           </td>
           <td>
             <a href="<?php echo BASE_URL . $short_url["short_code"]; ?>">
-              <?php echo $short_url["short_code"]; ?></a>
+              <?php echo BASE_URL . $short_url["short_code"]; ?></a>
+          </td>
+          <td>
+            <?php echo $short_url["clicked_counter"]; ?>
           </td>
           <td>
             <?php echo $short_url["created_at"]; ?>
           </td>
           <td>
-            <?php echo $short_url["created_at"]; ?>
+            <?php echo $short_url["updated_at"]; ?>
           </td>
           <td>
-            <?php echo $short_url["status"]; ?>
+            <?php echo $short_url["created_by"]; ?>
+          </td>
+          <td>
+            <?php if ($short_url["status"]): ?>
+              <span class="badge badge-success">Kích hoạt</span>
+            <?php else: ?>
+              <span class="badge badge-danger">Vô hiệu hoá</span>
+            <?php endif; ?>
           </td>
           <td>
             <a href="<?php echo BASE_URL . 'pages/edit-link.php' . '?id=' .$short_url["id"]; ?>" class="btn btn-info">Edit</a>

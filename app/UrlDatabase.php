@@ -12,14 +12,19 @@ class UrlDatabase {
 
     // Insert link vào database
     public function insertToDB($url, $code) {
-        $stmt = $this->db->prepare("INSERT INTO ". self::$table ."(long_url, short_code, created_at) VALUES (?, ?, now())");
+        $stmt = $this->db->prepare("INSERT INTO ". self::$table ."(long_url, short_code, created_at, updated_at) VALUES (?, ?, now(), now())");
         $stmt->bind_param("ss", $url, $code);
         $stmt->execute();
         $cache = new Cache;
+
+        $clickedCounter = $cache->getClickedCounter($code);
+        $cache->delData($code);
         $cache->addData($code, [
             "longUrl" => $url,
             "status" => 1,
-          ], 5);
+            "clickedCounter" => $clickedCounter,
+          ], 0);
+
         return $stmt;
     }
 
@@ -33,16 +38,18 @@ class UrlDatabase {
     }
 
     public function updateUrlData($id, $longUrl, $shortCode, $status, $expire) {
-        $stmt = $this->db->prepare("UPDATE ". self::$table ." SET long_url = ?, short_code = ?, status = ? WHERE id = ?");
+        $stmt = $this->db->prepare("UPDATE ". self::$table ." SET long_url = ?, short_code = ?, status = ?, updated_at = now() WHERE id = ?");
         $stmt->bind_param("ssii", $longUrl, $shortCode, $status, $id);
         $stmt->execute();
         $result = $stmt->affected_rows;
         $cache = new Cache;
-        $cache->delData($code);
+        $clickedCounter = $cache->getClickedCounter($shortCode);
+        $cache->delData($shortCode);
         $cache->addData($shortCode, [
             "longUrl" => $longUrl,
-            "status" => $status
-          ], 100);
+            "status" => $status,
+            "clickedCounter" => $clickedCounter
+          ], 0);
         return $result;
     }
 

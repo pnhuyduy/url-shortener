@@ -50,10 +50,17 @@ class Cache {
         return $this->connection->flush();
     }
 
-    public function pushTimeClick($key)
+    // Get số lần click của key
+    public function getClickedCounter($key) {
+        $urlData = $this->getData($key);
+        return $urlData["clickedCounter"];
+    }
+
+    // Thêm số lần click khi click vào link
+    public function pushClickedCounter($key)
     {
         $data = $this->getData($key);
-        $data["timeClick"]++;
+        $data["clickedCounter"]++;
         $this->setData($key, $data, 0);
     }
 }

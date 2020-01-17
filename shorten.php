@@ -15,4 +15,4 @@ if (isset($_POST['url'])) {
 
 }
 
-header('Location: '. $_SERVER['HTTP_REFERER']);
+header('Location: /');

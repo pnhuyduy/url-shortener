@@ -1,5 +1,6 @@
 <?php
     session_start();
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/configs.php';
     require_once $_SERVER['DOCUMENT_ROOT'] . '/app/UrlDatabase.php';
 
     $db = new UrlDatabase;
@@ -65,10 +66,12 @@
         <label for="formGroupExampleInput2"><b>Short code</b></label>
         <input type="text" class="form-control" name="short_code" value="<?php echo $urlData["short_code"]; ?>">
       </div>
-      <div class="form-group">
-        <label for="formGroupExampleInput2"><b>Hết hạn</b></label>
-        <input class="form-control" type="datetime-local" name="expire" value="">
-      </div>
+      <?php if (ENABLE_EXPIRED_TIME): ?>
+        <div class="form-group">
+          <label for="formGroupExampleInput2"><b>Hết hạn</b></label>
+          <input class="form-control" type="datetime-local" name="expire" value="">
+        </div>
+      <?php endif; ?>
       <div class="form-group">
         <label for="formGroupExampleInput2"><b>Status</b></label>
         <br>
