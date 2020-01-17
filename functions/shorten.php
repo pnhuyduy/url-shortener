@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/checkToken.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/functions/checkToken.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/app/UrlShortener.php';
 
 

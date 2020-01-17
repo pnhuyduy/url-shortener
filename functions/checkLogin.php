@@ -1,21 +1,21 @@
 <?php
-    
-    if (isset($_POST["email"])) {
-      // $url = 'https://192.168.1.16:9001/employee/get-token?email=' . $_POST["email"] . '&password=' . $_POST["password"];
-      //
-      // $ch = curl_init($url);
-      // // Bypass SSL
-      // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-      // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-      // // Thiết lập có return
-      // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-      // $result = curl_exec($ch);
-      //
-      // curl_close($ch);
-      // $res = json_decode($result, 1);
 
-      if (true) {
-          setcookie("token", "123", time() + (60 * COOKIE_EXPIRE_TIME), "/");
+    if (isset($_POST["email"])) {
+      $url = 'https://192.168.1.16:9001/employee/get-token?email=' . $_POST["email"] . '&password=' . $_POST["password"];
+
+      $ch = curl_init($url);
+      // Bypass SSL
+      curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+      // Thiết lập có return
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      $result = curl_exec($ch);
+
+      curl_close($ch);
+      $res = json_decode($result, 1);
+
+      if ($res["status"]) {
+          setcookie("token", $res["token"], time() + (60 * COOKIE_EXPIRE_TIME), "/");
           header("Refresh:0");
       } else {
         switch ($res["errorCode"]) {

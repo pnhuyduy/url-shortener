@@ -8,14 +8,16 @@ $db = new UrlDatabase;
 
 if (isset($_GET['shortUrl'])) {
     $shortUrl = strtolower($_GET['shortUrl']);
-    $url = $cache->getData($shortUrl);
+    $urlData = $cache->getData($shortUrl);
+
     if ($url) {
       if (!$url["status"]) {
-        echo "Debug at".__FILE__." ".__LINE__." ".__FUNCTION__; echo "<pre>"; print_r('status 0'); echo "</pre>"; die;
+        echo "Debug at".__FILE__." ".__LINE__." ".__FUNCTION__; echo "<pre>"; print_r('Link đã vô hiệu hoá'); echo "</pre>"; die;
       } else {
+        echo "Debug at ".__FILE__." ".__LINE__." ".__FUNCTION__; echo "<pre>"; print_r($_SERVER); echo "</pre>"; die;
         $longUrl = $url["longUrl"];
         $cache->pushClickedCounter($shortUrl);
-
+echo "Debug at ".__FILE__." ".__LINE__." ".__FUNCTION__; echo "<pre>"; print_r($_SERVER); echo "</pre>"; die;
         header("Location: {$longUrl}", true, 301);
         exit();
       }
@@ -29,6 +31,7 @@ if (isset($_GET['shortUrl'])) {
                 "clickedCounter" => $existsUrl["clicked_counter"],
               ], 0);
               $longUrl = $existsUrl["long_url"];
+              echo "Debug at ".__FILE__." ".__LINE__." ".__FUNCTION__; echo "<pre>"; print_r($_SERVER); echo "</pre>"; die;
               $cache->pushClickedCounter($shortUrl);
               header("Location: {$longUrl}", true, 301);
               exit();

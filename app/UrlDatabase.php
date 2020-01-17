@@ -19,6 +19,7 @@ class UrlDatabase {
         $clickedCounter = $cache->getClickedCounter($code);
         $cache->delData($code);
         $cache->addData($code, [
+          
             "longUrl" => $url,
             "status" => 1,
             "clickedCounter" => $clickedCounter,

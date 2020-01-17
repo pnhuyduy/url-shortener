@@ -60,7 +60,7 @@
           </td>
           <td>
             <a href="<?php echo BASE_URL . '/' . $short_url["short_code"]; ?>">
-              <?php echo BASE_URL . '/' . $short_url["short_code"]; ?></a>
+              <?php echo $short_url["short_code"]; ?></a>
           </td>
           <td>
             <?php echo $short_url["clicked_counter"]; ?>
@@ -72,7 +72,7 @@
             <?php echo $short_url["updated_at"]; ?>
           </td>
           <td>
-            <?php echo $short_url["created_by"]; ?>
+            <?php echo $short_url["username_created"]; ?>
           </td>
           <td>
             <?php if ($short_url["status"]): ?>
@@ -82,7 +82,7 @@
             <?php endif; ?>
           </td>
           <td>
-            <a href="<?php echo BASE_URL . '/pages/admin/edit-link.php' . '?id=' .$short_url["id"]; ?>" class="btn btn-info">Edit</a>
+            <a href="<?php echo BASE_URL . '/admin/edit-link.php' . '?id=' .$short_url["id"]; ?>" class="btn btn-info">Edit</a>
           </td>
         </tr>
         <?php endforeach; ?>

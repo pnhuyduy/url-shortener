@@ -18,12 +18,12 @@ foreach($allSlabs as $server => $slabs) {
     }
 }
 array_pop($list);
-echo "Debug at ".__FILE__." ".__LINE__." ".__FUNCTION__; echo "<pre>"; print_r($list); echo "</pre>"; die;
+// echo "Debug at ".__FILE__." ".__LINE__." ".__FUNCTION__; echo "<pre>"; print_r($list); echo "</pre>"; die;
 // $memcache->close();
 //
 //
 
-// foreach ($list as $key => $value) {
-//   $keyData = $memcache->getData($key);
-//   echo $key . '<br>' . $keyData;
-// }
+foreach ($list as $key) {
+  $keyData = $memcache->get($key);
+  echo $keyData["status"];
+}

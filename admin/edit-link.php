@@ -10,7 +10,7 @@
         $result = $db->updateUrlData($id, $_POST["long_url"], $_POST["short_code"], $_POST["status"], $_POST["expire"]);
         if ($result === 1) {
           $_SESSION['updateStatus'] = "Update Url thành công!";
-          header('Location: /pages/admin');
+          header('Location: /admin/');
         }
         elseif ($result === 0) {
           $message = "Url không thay đổi!";

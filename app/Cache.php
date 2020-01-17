@@ -55,6 +55,12 @@ class Cache {
         return $urlData["clickedCounter"];
     }
 
+    // Get status của key
+    public function getStatus($key) {
+        $urlData = $this->getData($key);
+        return $urlData["status"];
+    }
+
     // Thêm số lần click khi click vào link
     public function pushClickedCounter($key)
     {
