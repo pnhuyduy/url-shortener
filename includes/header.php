@@ -15,17 +15,8 @@
         <ul class="navbar-nav ml-auto">
           <?php if (isset($_COOKIE["token"])): ?>
             <li class="nav-item">
-              <?php
-                  $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-                  function logOut() {
-                    setcookie("token", "", time() - COOKIE_EXPIRE_TIME);
-                  }
 
-                  if (isset($_GET["logOut"])) {
-                    logOut();
-                  }
-               ?>
-              <a href="<?php echo $actual_link . '?logOut=true'; ?>" class="nav-link">Đăng xuất</a>
+              <a href="<?php echo BASE_URL . '/logOut.php'; ?>" class="nav-link">Đăng xuất</a>
             </li>
           <?php endif; ?>
         </ul>

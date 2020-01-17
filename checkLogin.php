@@ -15,7 +15,7 @@
       // $res = json_decode($result, 1);
 
       if (true) {
-          setcookie("token", "123", time() + (60 * 1), "/");
+          setcookie("token", "123", time() + (60 * COOKIE_EXPIRE_TIME), "/");
           header("Refresh:0");
       } else {
         switch ($res["errorCode"]) {
