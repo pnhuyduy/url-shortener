@@ -7,7 +7,7 @@
     $urlData = $db->getUrlData($id);
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $result = $db->updateUrlData($id, $_POST["long_url"], $_POST["short_code"], $_POST["status"], $_POST["expire"]);
+        $result = $db->updateUrlData($id, $_POST["long_url"], $_POST["short_code"], $_POST["status"], $_POST["expire"], $_COOKIE["userId"], $_COOKIE["fullname"]);
         if ($result === 1) {
           $_SESSION['updateStatus'] = "Update Url thành công!";
           header('Location: /admin/');

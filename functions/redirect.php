@@ -2,37 +2,40 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/app/Cache.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/app/UrlDatabase.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/app/Log.php';
 
 $cache = new Cache;
 $db = new UrlDatabase;
+$log = new Log;
 
 if (isset($_GET['shortUrl'])) {
-    $shortUrl = strtolower($_GET['shortUrl']);
-    $urlData = $cache->getData($shortUrl);
+    $shortCode = strtolower($_GET['shortUrl']);
+    $urlData = $cache->getData($shortCode);
 
-    if ($url) {
-      if (!$url["status"]) {
+    if ($urlData) {
+      if (!$urlData["status"]) {
         echo "Debug at".__FILE__." ".__LINE__." ".__FUNCTION__; echo "<pre>"; print_r('Link đã vô hiệu hoá'); echo "</pre>"; die;
       } else {
-        echo "Debug at ".__FILE__." ".__LINE__." ".__FUNCTION__; echo "<pre>"; print_r($_SERVER); echo "</pre>"; die;
-        $longUrl = $url["longUrl"];
-        $cache->pushClickedCounter($shortUrl);
-echo "Debug at ".__FILE__." ".__LINE__." ".__FUNCTION__; echo "<pre>"; print_r($_SERVER); echo "</pre>"; die;
+        $longUrl = $urlData["longUrl"];
+        $log->writeFileLog($shortCode, $_SERVER);
+        $cache->pushClickedCounter($shortCode);
+
         header("Location: {$longUrl}", true, 301);
         exit();
       }
     } else {
-        $existsUrl = $db->checkIfShortCodeExists($shortUrl);
+        $existsUrl = $db->checkIfShortCodeExists($shortCode);
         if ($existsUrl) {
           if ($existsUrl["status"]) {
-              $cache->addData($shortUrl, [
+              $cache->addData($shortCode, [
                 "longUrl" => $existsUrl["long_url"],
                 "status" => $existsUrl["status"],
                 "clickedCounter" => $existsUrl["clicked_counter"],
               ], 0);
               $longUrl = $existsUrl["long_url"];
-              echo "Debug at ".__FILE__." ".__LINE__." ".__FUNCTION__; echo "<pre>"; print_r($_SERVER); echo "</pre>"; die;
-              $cache->pushClickedCounter($shortUrl);
+              $log->writeFileLog($shortCode, $_SERVER);
+              $cache->pushClickedCounter($shortCode);
+              
               header("Location: {$longUrl}", true, 301);
               exit();
           } else {
