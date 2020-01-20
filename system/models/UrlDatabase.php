@@ -93,4 +93,12 @@ class UrlDatabase {
 
         return (empty($arr)) ? false : $arr;
     }
+
+    public function getShortUrlsJson()
+    {
+        $urls = [];
+        $urls["data"] = $this->getShortUrls();
+
+        return json_encode($urls, JSON_PRETTY_PRINT);
+    }
 }
