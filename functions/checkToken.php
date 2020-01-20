@@ -17,9 +17,12 @@ if (isset($_COOKIE["token"])) {
 
     curl_close($ch);
     $res = json_decode($result, 1);
-    
+
     if (!$res["status"]) {
       require_once 'checkLogin.php';
+    } else {
+      setcookie("userId", $res["data"]["id"], time() + (60 * COOKIE_EXPIRE_TIME), "/");
+      setcookie("fullname", $res["data"]["name"], time() + (60 * COOKIE_EXPIRE_TIME), "/");
     }
 } else {
     require_once 'checkLogin.php';

@@ -10,16 +10,16 @@ class UrlDatabase {
     }
 
     // Insert link vào database
-    public function insertToDB($url, $code) {
-        $stmt = $this->db->prepare("INSERT INTO ". self::$table ."(long_url, short_code, created_at, updated_at) VALUES (?, ?, now(), now())");
-        $stmt->bind_param("ss", $url, $code);
+    public function insertToDB($url, $code, $userId, $fullname) {
+        $stmt = $this->db->prepare("INSERT INTO ". self::$table ."(long_url, short_code, user_created, username_created, created_at, updated_at) VALUES (?, ?, ?, ?, now(), now())");
+        $stmt->bind_param("ssis", $url, $code, $userId, $fullname);
         $stmt->execute();
         $cache = new Cache;
 
         $clickedCounter = $cache->getClickedCounter($code);
         $cache->delData($code);
         $cache->addData($code, [
-          
+
             "longUrl" => $url,
             "status" => 1,
             "clickedCounter" => $clickedCounter,
@@ -37,9 +37,9 @@ class UrlDatabase {
         return (empty($result)) ? false : true;
     }
 
-    public function updateUrlData($id, $longUrl, $shortCode, $status, $expire) {
-        $stmt = $this->db->prepare("UPDATE ". self::$table ." SET long_url = ?, short_code = ?, status = ?, updated_at = now() WHERE id = ?");
-        $stmt->bind_param("ssii", $longUrl, $shortCode, $status, $id);
+    public function updateUrlData($id, $longUrl, $shortCode, $status, $expire, $userId, $fullname) {
+        $stmt = $this->db->prepare("UPDATE ". self::$table ." SET long_url = ?, short_code = ?, status = ?, user_created = ?, username_created = ?, updated_at = now() WHERE id = ?");
+        $stmt->bind_param("ssiisi", $longUrl, $shortCode, $status, $userId, $fullname, $id);
         $stmt->execute();
         $result = $stmt->affected_rows;
         $cache = new Cache;

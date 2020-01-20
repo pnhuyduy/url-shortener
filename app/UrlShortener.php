@@ -12,7 +12,7 @@ class UrlShortener {
         $this->db = new UrlDatabase;
     }
 
-    public function createShortCode($url, $duplicateURL = 0) {
+    public function createShortCode($url, $duplicateURL = 0, $userId = null, $fullname) {
         // if (empty($url)) {
         //     throw new Exception("URL truyền vào trỗng");
         // }
@@ -28,7 +28,7 @@ class UrlShortener {
         };
 
         if ($duplicateURL) { // option cho phép một url đích có nhiều short code
-            $this->db->insertToDB($url, $shortCode);
+            $this->db->insertToDB($url, $shortCode, $userId, $fullname);
             return $shortCode;
 
         } else {
@@ -36,7 +36,7 @@ class UrlShortener {
                 $shortCode = $this->db->getShortCodeByUrl($url);
                 return $shortCode;
             } else { // tạo mới nếu chưa tồn tại
-                $this->db->insertToDB($url, $shortCode);
+                $this->db->insertToDB($url, $shortCode, $userId, $fullname);
                 return $shortCode;
             }
         }
