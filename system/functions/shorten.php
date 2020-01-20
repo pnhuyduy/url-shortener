@@ -1,6 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/functions/checkToken.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/app/UrlShortener.php';
+require_once dirname($_SERVER['DOCUMENT_ROOT']) . '/functions/checkToken.php';
+require_once dirname($_SERVER['DOCUMENT_ROOT']) . '/app/UrlShortener.php';
 
 
 $UrlShortener = new UrlShortener;

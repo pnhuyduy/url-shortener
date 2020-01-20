@@ -1,5 +1,5 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/functions/configs.php';
+    require_once dirname($_SERVER['DOCUMENT_ROOT']) . '/system/functions/configs.php';
 /**
  *
  */

@@ -1,5 +1,5 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/functions/configs.php';
+    require_once dirname($_SERVER['DOCUMENT_ROOT']) . '/system/functions/configs.php';
 /**
  *
  */
@@ -8,7 +8,7 @@ class Log {
     private $logDir;
     public function __construct()
     {
-      $this->logDir = $_SERVER['DOCUMENT_ROOT'] . "/log/";
+      $this->logDir = dirname($_SERVER['DOCUMENT_ROOT']) . "/log/";
       if (!file_exists($this->logDir)) {
         mkdir($this->logDir, 0777);
       }

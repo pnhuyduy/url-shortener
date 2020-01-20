@@ -1,5 +1,5 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/functions/checkToken.php';
+    require_once dirname($_SERVER['DOCUMENT_ROOT']) . '/system/functions/checkToken.php';
 
 ?>
 <!DOCTYPE html>
@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <?php include_once 'includes/header.php'; ?>
+  <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php'; ?>
 
   <div class="container">
     <div class="jumbotron">

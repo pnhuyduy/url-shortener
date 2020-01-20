@@ -1,8 +1,8 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/app/Cache.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/app/UrlDatabase.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/app/Log.php';
+require_once dirname($_SERVER['DOCUMENT_ROOT']) . '/system/models/Cache.php';
+require_once dirname($_SERVER['DOCUMENT_ROOT']) . '/system/models/UrlDatabase.php';
+require_once dirname($_SERVER['DOCUMENT_ROOT']) . '/system/models/Log.php';
 
 $cache = new Cache;
 $db = new UrlDatabase;
@@ -35,7 +35,7 @@ if (isset($_GET['shortUrl'])) {
               $longUrl = $existsUrl["long_url"];
               $log->writeFileLog($shortCode, $_SERVER);
               $cache->pushClickedCounter($shortCode);
-              
+
               header("Location: {$longUrl}", true, 301);
               exit();
           } else {

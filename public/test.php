@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/app/Cache.php';
+require_once dirname($_SERVER['DOCUMENT_ROOT']) . '/system/models/Cache.php';
 
 $cache = new Cache;
 

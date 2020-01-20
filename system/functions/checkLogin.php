@@ -39,11 +39,11 @@
       <!DOCTYPE html>
       <html lang="en">
       <head>
-        <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php'; ?>
+        <?php include_once dirname($_SERVER['DOCUMENT_ROOT']) . '/public/includes/head.php'; ?>
         <title>Document</title>
       </head>
       <body>
-        <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php'; ?>
+        <?php include_once dirname($_SERVER['DOCUMENT_ROOT']) . '/public/includes/header.php'; ?>
 
         <div class="container">
           <?php
@@ -75,7 +75,7 @@
           </div>
         </div>
 
-        <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/scripts.php'; ?>
+        <?php include_once dirname($_SERVER['DOCUMENT_ROOT']) . '/public/includes/scripts.php'; ?>
       </body>
       </html>
       <?php die;
