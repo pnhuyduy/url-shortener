@@ -17,7 +17,7 @@
     <div class="jumbotron">
       <h1 class="display-4 text-center">URL Shortener</h1>
       <hr class="my-4">
-      <form class="input-group mb-3" action="functions/shorten.php" method="POST">
+      <form class="input-group mb-3" action="/shorten.php" method="POST">
         <input type="url" class="form-control" placeholder="E.g: https://www.google.com" name="url" required>
         <div class="input-group-append">
           <button class="btn btn-info" type="submit" id="button-addon2">Shorten</button>
@@ -37,6 +37,11 @@
   </div>
 
   <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/scripts.php'; ?>
+  <script type="text/javascript">
+    function validateUrl(url) {
+      return /^((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)$/.test(url)
+    }
+  </script>
 </body>
 
 </html>
