@@ -1,4 +1,5 @@
 <?php
+require_once dirname($_SERVER['DOCUMENT_ROOT']) . '/system/functions/checkToken.php';
 require_once dirname($_SERVER['DOCUMENT_ROOT']) . '/system/models/UrlDatabase.php';
 
 $db = new UrlDatabase;

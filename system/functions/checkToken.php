@@ -19,11 +19,11 @@ if (isset($_COOKIE["token"])) {
     $res = json_decode($result, 1);
 
     if (!$res["status"]) {
-      // require_once 'checkLogin.php';
+      require_once 'checkLogin.php';
     } else {
-      // setcookie("userId", $res["data"]["id"], time() + (60 * COOKIE_EXPIRE_TIME), "/");
-      // setcookie("fullname", $res["data"]["name"], time() + (60 * COOKIE_EXPIRE_TIME), "/");
+      setcookie("userId", $res["data"]["id"], time() + (60 * COOKIE_EXPIRE_TIME), "/");
+      setcookie("fullname", $res["data"]["name"], time() + (60 * COOKIE_EXPIRE_TIME), "/");
     }
 } else {
-    // require_once 'checkLogin.php';
+    require_once 'checkLogin.php';
 }

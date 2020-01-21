@@ -71,7 +71,7 @@
 
           data = JSON.parse(data);
           data.data.map((url) => {
-            if (url.status) {
+            if (url.status === 1) {
               url.status = '<span class="badge badge-success">Kích hoạt</span>'
             } else {
               url.status = '<span class="badge badge-danger">Vô hiệu hoá</span>'
@@ -85,7 +85,10 @@
             url.short_code = shortCode;
 
             editHref = window.location.href
-            url.action = `<a href="${editHref}edit-link.php?id=${url.id}" class="btn btn-info">Edit</a>`
+            url.action = `
+            <a href="${editHref}edit-link.php?id=${url.id}" class="btn btn-info">Edit</a>
+            <a href="${editHref}delete-link.php?id=${url.id}" class="btn btn-danger">Delete</a>
+            `
           })
 
           return JSON.stringify(data);

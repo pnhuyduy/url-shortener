@@ -27,6 +27,7 @@ class Log {
           "HTTP_ACCEPT_ENCODING" => $server["HTTP_ACCEPT_ENCODING"],
           "HTTP_ACCEPT_LANGUAGE" => $server["HTTP_ACCEPT_LANGUAGE"],
           "HTTP_COOKIE" => $server["HTTP_COOKIE"],
+          "HTTP_X_FORWARDED_FOR" => $server["HTTP_X_FORWARDED_FOR"],
           "REMOTE_ADDR" => $server["REMOTE_ADDR"],
         ];
 

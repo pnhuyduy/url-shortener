@@ -30,7 +30,7 @@ class UrlDatabase {
 
     // Kiểm tra nếu link đã tồn tại
     public function urlExistsInDB($url) {
-        $stmt = $this->db->prepare("SELECT * FROM ". self::$table ." WHERE long_url = ? LIMIT 1");
+        $stmt = $this->db->prepare("SELECT * FROM ". self::$table ." WHERE long_url = ? AND status BETWEEN 1 AND 2 LIMIT 1");
         $stmt->bind_param("s", $url);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_assoc();
@@ -53,9 +53,20 @@ class UrlDatabase {
         return $result;
     }
 
+    public function deleteUrlData($id)
+    {
+        $status = 3;
+        $stmt = $this->db->prepare("UPDATE ". self::$table ." SET status = $status, updated_at = now() WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->affected_rows;
+
+        return $result;
+    }
+
     // Kiểm tra nếu link đã tồn tại
     public function checkIfShortCodeExists($shortCode) {
-        $stmt = $this->db->prepare("SELECT * FROM ". self::$table ." WHERE short_code = ? LIMIT 1");
+        $stmt = $this->db->prepare("SELECT * FROM ". self::$table ." WHERE short_code = ? AND status BETWEEN 1 AND 2 LIMIT 1");
         $stmt->bind_param("s", $shortCode);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_assoc();
@@ -64,7 +75,7 @@ class UrlDatabase {
 
     // Get short code từ url
     public  function getShortCodeByUrl($url) {
-        $stmt = $this->db->prepare("SELECT * FROM ". self::$table ." WHERE long_url = ? LIMIT 1");
+        $stmt = $this->db->prepare("SELECT * FROM ". self::$table ." WHERE long_url = ? AND status BETWEEN 1 AND 2 LIMIT 1");
         $stmt->bind_param("s", $url);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_assoc();
@@ -73,7 +84,7 @@ class UrlDatabase {
 
     // Get Url data từ id
     public function getUrlData($id) {
-        $stmt = $this->db->prepare("SELECT * FROM ". self::$table ." WHERE id = ? LIMIT 1");
+        $stmt = $this->db->prepare("SELECT * FROM ". self::$table ." WHERE id = ? AND status BETWEEN 1 AND 2 LIMIT 1");
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_assoc();
@@ -84,7 +95,7 @@ class UrlDatabase {
     // Get tất cả url trong database
     public function getShortUrls() {
         $arr = [];
-        $stmt = $this->db->prepare("SELECT * FROM ". self::$table);
+        $stmt = $this->db->prepare("SELECT * FROM ". self::$table . " WHERE status BETWEEN 1 AND 2");
         $stmt->execute();
         $result = $stmt->get_result();
         while($row = $result->fetch_assoc()) {
