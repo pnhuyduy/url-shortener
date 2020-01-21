@@ -37,14 +37,14 @@ class UrlDatabase {
         return (empty($result)) ? false : true;
     }
 
-    public function updateUrlData($id, $longUrl, $shortCode, $status, $expire, $userId, $fullname) {
+    public function updateUrlData($id, $longUrl, $shortCode, $oldShortCode, $status, $expire, $userId, $fullname) {
         $stmt = $this->db->prepare("UPDATE ". self::$table ." SET long_url = ?, short_code = ?, status = ?, user_created = ?, username_created = ?, updated_at = now() WHERE id = ?");
         $stmt->bind_param("ssiisi", $longUrl, $shortCode, $status, $userId, $fullname, $id);
         $stmt->execute();
         $result = $stmt->affected_rows;
         $cache = new Cache;
-        $clickedCounter = $cache->getClickedCounter($shortCode);
-        $cache->delData($shortCode);
+        $clickedCounter = $cache->getClickedCounter($oldShortCode);
+        $cache->delData($oldShortCode);
         $cache->addData($shortCode, [
             "longUrl" => $longUrl,
             "status" => $status,

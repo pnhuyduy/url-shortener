@@ -1,7 +1,7 @@
 <?php
 $memcache = new Memcache;
 $memcache->connect('localhost', 11211) or die ("Could not connect to memcache server");
-
+echo $memcache->getVersion();
 
 $allSlabs = $memcache->getExtendedStats('slabs');
 $items = $memcache->getExtendedStats('items');

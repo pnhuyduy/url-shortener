@@ -1,4 +1,5 @@
 <?php
+
     require_once 'ShortCode.php';
     require_once 'UrlDatabase.php';
     require_once 'Cache.php';
@@ -21,11 +22,10 @@ class UrlShortener {
         // }
 
         $cache = new Cache;
-        $shortCode = ShortCode::generateRandomString();
-
-        while ($cache->checkIfKeyExists($shortCode)) {
-          $shortCode = ShortCode::generateRandomString();
-        };
+        
+        do {
+            $shortCode = ShortCode::generateRandomString();
+        } while ($cache->checkIfKeyExists($shortCode));
 
         if ($duplicateURL) { // option cho phép một url đích có nhiều short code
             $this->db->insertToDB($url, $shortCode, $userId, $fullname);
@@ -40,6 +40,25 @@ class UrlShortener {
                 return $shortCode;
             }
         }
+    }
+
+    public function validateUpdateInput($id, $input)
+    {
+        $errors = [];
+        $exists = $this->db->getUrlData($id);
+
+        if ($exists["long_url"] !== $input["long_url"]) {
+            if ($this->db->urlExistsInDB($input["long_url"])) {
+                $errors["long_url"] = "Url đích đã tồn tại: " . $input["long_url"];
+            }
+        }
+        if ($exists["short_code"] !== $input["short_code"]) {
+            if ($this->db->checkIfShortCodeExists($input["short_code"])) {
+                $errors["short_code"] = "Short code đã tồn tại: " . $input["short_code"];
+            }
+        }
+
+        return $errors;
     }
 
     // Validate url
