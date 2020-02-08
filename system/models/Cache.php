@@ -49,6 +49,13 @@ class Cache {
         return $this->connection->flush();
     }
 
+    // Get short code gốc
+    public function getOriginalShortCode($key)
+    {
+        $urlData = $this->getData($key);
+        return $urlData["originalShortCode"];
+    }
+
     // Get số lần click của key
     public function getClickedCounter($key) {
         $urlData = $this->getData($key);

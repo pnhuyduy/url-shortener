@@ -19,7 +19,7 @@ class UrlDatabase {
         $clickedCounter = $cache->getClickedCounter($code);
         $cache->delData($code);
         $cache->addData($code, [
-
+            "originalShortCode" => $code,
             "longUrl" => $url,
             "status" => 1,
             "clickedCounter" => $clickedCounter,
@@ -42,10 +42,14 @@ class UrlDatabase {
         $stmt->bind_param("ssiisi", $longUrl, $shortCode, $status, $userId, $fullname, $id);
         $stmt->execute();
         $result = $stmt->affected_rows;
+
         $cache = new Cache;
         $clickedCounter = $cache->getClickedCounter($oldShortCode);
+        $originalShortCode = $cache->getOriginalShortCode($oldShortCode);
+
         $cache->delData($oldShortCode);
         $cache->addData($shortCode, [
+            "originalShortCode" => $originalShortCode,
             "longUrl" => $longUrl,
             "status" => $status,
             "clickedCounter" => $clickedCounter
@@ -54,7 +58,9 @@ class UrlDatabase {
     }
 
     public function deleteUrlData($id)
-    {
+    {   $urlData = $this->getUrlData($id);
+        $cache = new Cache;
+        $cache->delData($urlData["short_code"]);
         $status = 3;
         $stmt = $this->db->prepare("UPDATE ". self::$table ." SET status = $status, updated_at = now() WHERE id = ?");
         $stmt->bind_param("i", $id);
@@ -70,6 +76,7 @@ class UrlDatabase {
         $stmt->bind_param("s", $shortCode);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_assoc();
+
         return (empty($result)) ? false : $result;
     }
 
@@ -79,6 +86,7 @@ class UrlDatabase {
         $stmt->bind_param("s", $url);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_assoc();
+        
         return (empty($result)) ? false : $result["short_code"];
     }
 

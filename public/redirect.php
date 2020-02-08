@@ -17,7 +17,7 @@ if (isset($_GET['shortUrl'])) {
         echo "Debug at".__FILE__." ".__LINE__." ".__FUNCTION__; echo "<pre>"; print_r('Link đã vô hiệu hoá'); echo "</pre>"; die;
       } else {
         $longUrl = $urlData["longUrl"];
-        $log->writeFileLog($shortCode, $_SERVER);
+        $log->writeFileLog($urlData["originalShortCode"], $shortCode, $_SERVER);
         $cache->pushClickedCounter($shortCode);
 
         header("Location: {$longUrl}", true, 301);
@@ -33,7 +33,7 @@ if (isset($_GET['shortUrl'])) {
                 "clickedCounter" => $existsUrl["clicked_counter"],
               ], 0);
               $longUrl = $existsUrl["long_url"];
-              $log->writeFileLog($shortCode, $_SERVER);
+              $log->writeFileLog($urlData["originalShortCode"], $shortCode, $_SERVER);
               $cache->pushClickedCounter($shortCode);
 
               header("Location: {$longUrl}", true, 301);

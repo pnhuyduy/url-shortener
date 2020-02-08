@@ -34,10 +34,10 @@ class Log {
         return $clickData;
     }
 
-    public function writeFileLog($shortCode, $server) {
+    public function writeFileLog($originalShortCode, $shortCode, $server) {
         $logData = $this->collectClickData($shortCode, $server);
 
-        $dir = $this->logDir . $shortCode;
+        $dir = $this->logDir . $originalShortCode;
         if (!file_exists($dir)) {
           mkdir($dir, 0777);
         }
